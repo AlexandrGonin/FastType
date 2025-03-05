@@ -1,63 +1,20 @@
-<script lang="ts">
-    const words = [
-      "print('hello')",
-      "def hello():",
-      "while count > 0:",
-      "for i in range(5):",
-      "return number",
-      "from tkinter import *",
-      "int(input())",
-    ];
-  
-    let game = $state(false);
-    let currentWord = $state("");
-    let input = $state("");
-    let score = $state(0);
-    let timer = $state(0);
-  
-    function startGame() {
-      game = true;
-      currentWord = words[Math.floor(Math.random() * words.length)];
-      score = 0;
-      input = "";
-      function decreaseTimer() {
-        if (timer > 0) {
-          timer -= 1;
-          setTimeout(decreaseTimer, 1000);
-        } else {
-          game = false;
-        }
-      }
-      timer = 15;
-      decreaseTimer();
-    }
-  
-    $effect(() => {
-      if (currentWord == input && game) {
-        currentWord = words[Math.floor(Math.random() * words.length)];
-        input = "";
-        score += 1;
-      }
-    });
-  </script>
-  
-  <div class="p-5 space-y-5">
-    <div>
-      <div>Счет: {score}</div>
-      <button onclick={startGame} class="text-blue-500">Играть</button>
-    </div>
-  
-    {#if game}
-      <div class="space-y-3 text-3xl">
-        <div>{timer + 1} сек осталось</div>
-        <div class="font-mono">{currentWord}</div>
-        <input
-          type="text"
-          placeholder="..."
-          bind:value={input}
-          class="font-mono"
-          class:text-red-500={!currentWord.startsWith(input)}
-        />
-      </div>
+<script>
+    import GameCommon from "./Game_common.svelte";
+    import GameTimer from "./Game_timer.svelte";
+    import Error404 from "./Error404.svelte";
+
+    const views1 = ["Common", "Timer"];
+    let currentView = $state(views1[0]);
+</script>
+
+<main>
+    {#if currentView == "Statistics"}
+        <div>statistics</div>
+    {:else if currentView == "Common"}
+        <GameCommon />
+    {:else if currentView == "Timer"}
+        <GameTimer />
+    {:else}
+        <Error404 />
     {/if}
-  </div>
+</main>
