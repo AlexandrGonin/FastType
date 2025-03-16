@@ -8,9 +8,7 @@
 </script>
 
 <main>
-    {#if currentView == "Statistics"}
-        <div>statistics</div>
-    {:else if currentView == "Common"}
+    {#if currentView == "Common"}
         <GameCommon />
     {:else if currentView == "Timer"}
         <GameTimer />

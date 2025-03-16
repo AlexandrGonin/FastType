@@ -12,7 +12,11 @@
   class="h-dvh flex flex-col bg-gradient-to-br from-blue-1000 via-blue-800 to-blue-500"
 >
   <header class="p-5 flex gap-3 items-center bg-gray-800">
-    <img src={logo} alt="LOGO" class="size-16" />
+    <button
+      class="px-4 py-1 rounded-lg cursor-pointer active:scale-95 transition-transform"
+    >
+      <img src={logo} alt="LOGO" class="size-16" />
+    </button>
     <nav class="grow flex justify-center items-center gap-1">
       {#each views as view}
         <button

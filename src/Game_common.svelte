@@ -1,32 +1,29 @@
 <script lang="ts">
     import type { Action } from "svelte/action";
-    const words = [
-        "print('hello')",
-        "def hello():",
-        "while count > 0:",
-        "for i in range(5):",
-        "return number",
-        "from tkinter import *",
-        "int(input())",
-    ];
+    import { words } from "./words.js";
 
     let game = $state(true);
     let currentWord = $state("");
     let input = $state("");
-    let score = $state(1);
+    let score = $state(0);
+    let currentNum = $state(0);
 
     function startGame() {
         game = true;
-        currentWord = words[Math.floor(Math.random() * words.length)];
+        currentWord = words[currentNum];
         score = 0;
         input = "";
     }
 
     $effect(() => {
         if (currentWord == input && game) {
-            currentWord = words[Math.floor(Math.random() * words.length)];
+            currentWord = words[currentNum];
             input = "";
             score += 1;
+            currentNum += 1;
+        }
+        if (!currentWord.startsWith(input)) {
+            input = "";
         }
     });
 
@@ -40,7 +37,9 @@
 <div class="p-50 space-y-5">
     {#if game}
         <div class="space-y-3 text-3xl">
-            <div class="font-mono py-5">{currentWord}</div>
+            <div class="font-mono py-5">
+                {words.slice(currentNum - 1, words.length).join("")}
+            </div>
             <div class="flex">
                 <div>{score}.</div>
                 <input
