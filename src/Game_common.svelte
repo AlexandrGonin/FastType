@@ -38,7 +38,7 @@
     {#if game}
         <div class="space-y-3 text-3xl">
             <div class="font-mono py-5">
-                {words.slice(currentNum - 1, words.length).join("")}
+                {words.slice(currentNum - 1, currentNum - 1 + 50).join("")}
             </div>
             <div class="flex">
                 <div>{score}.</div>
