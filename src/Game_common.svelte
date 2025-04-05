@@ -2,6 +2,7 @@
     import type { Action } from "svelte/action";
     import { words } from "./words.js";
 
+    let isCorrectLetter = $state(true);
     let game = $state(true);
     let currentWord = $state("");
     let input = $state("");
@@ -16,7 +17,8 @@
     }
 
     $effect(() => {
-        if (currentWord == input && game) {
+        if (currentWord == input) {
+            isCorrectLetter = true;
             currentWord = words[currentNum];
             input = "";
             score += 1;
@@ -24,6 +26,7 @@
         }
         if (!currentWord.startsWith(input)) {
             input = "";
+            isCorrectLetter = false;
         }
     });
 
@@ -35,13 +38,17 @@
 <svelte:window onclick={() => init(document.getElementById("input")!)} />
 
 <div class="p-50 space-y-5">
-    {#if game}
+    {#if currentNum}
         <div class="space-y-3 text-3xl">
-            <div class="font-mono py-5">
-                {words.slice(currentNum - 1, currentNum - 1 + 50).join("")}
+            <div class="font-mono py-5 flex">
+                <div style="color: {isCorrectLetter ? 'white' : 'red'}">
+                    {words.slice(currentNum - 1, currentNum).join("")}
+                </div>
+                <div>
+                    {words.slice(currentNum, currentNum - 1 + 68).join("")}
+                </div>
             </div>
             <div class="flex">
-                <div>{score}.</div>
                 <input
                     id="input"
                     type="text"
