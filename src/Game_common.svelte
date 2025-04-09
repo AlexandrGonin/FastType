@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Action } from "svelte/action";
-    import { words } from "./words.js";
+    import { words } from "./Words/words.js";
 
     let isCorrectLetter = $state(true);
     let game = $state(true);

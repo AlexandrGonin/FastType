@@ -4,7 +4,7 @@
   import Error404 from "./Error404.svelte";
   import logo from "./assets/logo.svg";
 
-  const views = ["Home", "Game"];
+  const views = ["Главная", "Играть"];
   let currentView = $state(views[0]);
 </script>
 
@@ -32,9 +32,9 @@
   </header>
 
   <!-- проверка на текущую страницу -->
-  {#if currentView == "Home"}
+  {#if currentView == "Главная"}
     <Menu />
-  {:else if currentView == "Game"}
+  {:else if currentView == "Играть"}
     <Game />
   {:else}
     <Error404 />
