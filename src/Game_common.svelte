@@ -40,7 +40,7 @@
 <div class="p-50 space-y-5">
     {#if currentNum}
         <div class="space-y-3 text-3xl">
-            <div class="font-mono py-5 flex">
+            <div class="font-mono py-5 flex whitespace-pre-wrap">
                 <div style="color: {isCorrectLetter ? 'white' : 'red'}">
                     {words.slice(currentNum - 1, currentNum).join("")}
                 </div>
