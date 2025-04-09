@@ -14,6 +14,7 @@
   <header class="p-5 flex gap-3 items-center bg-gray-800">
     <button
       class="px-4 py-1 rounded-lg cursor-pointer active:scale-95 transition-transform"
+      onclick={() => (currentView = views[0])}
     >
       <img src={logo} alt="LOGO" class="size-16" />
     </button>
