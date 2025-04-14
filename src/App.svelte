@@ -35,6 +35,12 @@
   <!-- проверка на текущую страницу -->
   {#if currentView == "Главная"}
     <Menu />
+    <button
+      onclick={() => (currentView = views[1])}
+      class="my-25 text-2xl px-4 py-1 rounded-lg cursor-pointer active:scale-80 transition-transform bg-blue-950 w-75 mx-40"
+    >
+      Начать тренировку
+    </button>
   {:else if currentView == "Играть"}
     <Game />
   {:else}
