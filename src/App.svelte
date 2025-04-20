@@ -11,7 +11,7 @@
 <main
   class="h-dvh flex flex-col bg-gradient-to-br from-blue-1000 via-blue-800 to-blue-500"
 >
-  <div class="min-h-full lg:hidden">
+  <div class="min-h-full lg:hidden fixed">
     <div>Не доступно на мобильных устройствах, используйте на ПК</div>
   </div>
   <header class="p-5 flex gap-3 items-center bg-gray-800">
