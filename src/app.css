@@ -5,6 +5,6 @@
 
 body{
     @apply text-white bg-neutral-800 font-mono;
-
+    overflow: hidden;
     
 }
