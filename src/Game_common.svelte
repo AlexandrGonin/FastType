@@ -6,7 +6,8 @@
     let game = $state(true);
     let currentWord = $state("");
     let input = $state("");
-    let score = $state(0);
+    let score = $state(Number(localStorage.getItem("score")) ?? 0);
+    $effect(() => localStorage.setItem("score", score.toString()));
     let currentNum = $state(0);
 
     function startGame() {
@@ -41,7 +42,7 @@
     {#if currentNum}
         <div class="space-y-3 text-3xl">
             <div>
-                Прогресс: {score} символов
+                Прогресс: {Number(localStorage.getItem("score"))} символов
             </div>
             <div class="font-mono py-5 flex whitespace-pre-wrap">
                 <div style="color: {isCorrectLetter ? 'white' : 'red'}">
