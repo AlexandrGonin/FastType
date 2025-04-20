@@ -11,7 +11,9 @@
 <main
   class="h-dvh flex flex-col bg-gradient-to-br from-blue-1000 via-blue-800 to-blue-500"
 >
-  <div class="min-h-full lg:hidden">Не доступно на мобильных устройствах</div>
+  <div class="min-h-full lg:hidden m-10">
+    Не доступно на мобильных устройствах, попробуйт
+  </div>
   <header class="p-5 flex gap-3 items-center bg-gray-800">
     <button
       class="px-4 py-1 rounded-lg cursor-pointer active:scale-95 transition-transform"
