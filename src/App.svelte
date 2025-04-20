@@ -12,7 +12,9 @@
   class="h-dvh flex flex-col bg-gradient-to-br from-blue-1000 via-blue-800 to-blue-500"
 >
   <div class="min-h-full lg:hidden">
-    <div>Не доступно на мобильных устройствах, используйте на ПК</div>
+    <div class="p-5">
+      Не доступно на мобильных устройствах, используйте на ПК
+    </div>
   </div>
   <div class="hidden sm:block">
     <header class="p-5 flex gap-3 items-center bg-gray-800">
