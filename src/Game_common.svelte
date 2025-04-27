@@ -2,6 +2,21 @@
     import type { Action } from "svelte/action";
     import { words } from "./Words/words.js";
 
+    type NestedArray<T> = Array<Array<T>>;
+    function shuffleArray<T>(array: T[]): void {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1)); // выбираем индекс от 0 до текущего элемента включительно
+            [array[i], array[j]] = [array[j], array[i]]; // меняем местами два элемента
+        }
+    }
+    const flattenNestedList = <T,>(nestedList: NestedArray<T>): T[] => {
+        return nestedList.reduce(
+            (acc: T[], currentValue: T[]) => acc.concat(currentValue),
+            [] as T[],
+        );
+    };
+    shuffleArray(words);
+    let words1 = flattenNestedList(words);
     let isCorrectLetter = $state(true);
     let game = $state(true);
     let currentWord = $state("");
@@ -12,7 +27,7 @@
 
     function startGame() {
         game = true;
-        currentWord = words[currentNum];
+        currentWord = words1[currentNum];
         score = 0;
         input = "";
     }
@@ -20,7 +35,7 @@
     $effect(() => {
         if (currentWord == input) {
             isCorrectLetter = true;
-            currentWord = words[currentNum];
+            currentWord = words1[currentNum];
             input = "";
             score += 1;
             currentNum += 1;
@@ -32,7 +47,9 @@
     });
 
     const init: Action = (el) => {
-        el.focus();
+        if (el != null) {
+            el.focus();
+        }
     };
 </script>
 
@@ -46,10 +63,10 @@
             </div>
             <div class="font-mono py-5 flex whitespace-pre-wrap">
                 <div style="color: {isCorrectLetter ? 'white' : 'red'}">
-                    {words.slice(currentNum - 1, currentNum).join("")}
+                    {words1.slice(currentNum - 1, currentNum).join("")}
                 </div>
                 <div>
-                    {words.slice(currentNum, currentNum - 1 + 68).join("")}
+                    {words1.slice(currentNum, currentNum - 1 + 68).join("")}
                 </div>
             </div>
             <div class="flex">
