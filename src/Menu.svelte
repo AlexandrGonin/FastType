@@ -77,7 +77,7 @@
   }
 </script>
 
-<div class="flex justify-center items-center mt-50">
+<div class="mt-50 ml-40">
   <div class="w-400">
     <div
       use:animateTyping={["FastType", "Train your skills"]}

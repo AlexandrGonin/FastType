@@ -28,26 +28,24 @@
         >
         <Learning />
     {:else if currentView == "Selector"}
-        <div
-            class="mx-40 my-10 px-10 py-5 w-60 rounded-lg items-center text-black bg-gradient-to-br from-gray-400 to-gray-200"
-        >
-            Выберите режим:
-        </div>
-        <div
-            class="grow flex justify-center items-center gap-100 bg-gray-400 rounded-lg mx-40 p-10"
-        >
-            <button
-                class="px-4 py-1 rounded-lg cursor-pointer active:scale-80 transition-transform font-bold text-3xl text-gray-500 border-1 border-gray-300 bg-gray-300 w-50 h-50"
-                onclick={() => (currentView = views1[1])}>Обычный</button
+        <div>
+            <div class="flex justify-center m-20 text-2xl">Выберите режим:</div>
+            <div
+                class="flex items-start justify-center w-full flex-wrap gap-40 p-4 md:p-8"
             >
-            <button
-                class="px-4 py-1 rounded-lg cursor-pointer active:scale-80 transition-transform font-bold text-3xl text-gray-500 border-1 border-gray-300 bg-gray-300 w-50 h-50"
-                onclick={() => (currentView = views1[2])}>На время</button
-            >
-            <button
-                class="px-4 py-1 rounded-lg cursor-pointer active:scale-80 transition-transform font-bold text-3xl text-gray-500 border-1 border-gray-300 bg-gray-300 w-50 h-50"
-                onclick={() => (currentView = views1[3])}>Обучение</button
-            >
+                <button
+                    class="px-4 py-1 rounded-3xl cursor-pointer active:scale-80 transition-transform font-thin text-2xl bg-violet-500 w-50 h-50"
+                    onclick={() => (currentView = views1[1])}>Обычный</button
+                >
+                <button
+                    class="px-4 py-1 rounded-3xl cursor-pointer active:scale-80 transition-transform font-thin text-2xl bg-violet-500 w-50 h-50"
+                    onclick={() => (currentView = views1[2])}>На время</button
+                >
+                <button
+                    class="px-4 py-1 rounded-3xl cursor-pointer active:scale-80 transition-transform font-thin text-2xl bg-violet-500 w-50 h-50"
+                    onclick={() => (currentView = views1[3])}>Обучение</button
+                >
+            </div>
         </div>
     {/if}
 </main>

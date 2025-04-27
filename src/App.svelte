@@ -8,12 +8,10 @@
   let currentView = $state(views[0]);
 </script>
 
-<main
-  class="h-dvh flex flex-col bg-gradient-to-br from-blue-1000 via-blue-800 to-blue-500"
->
+<main class="h-dvh flex flex-col bg-gradient-to-t from-purple-700 to-blue-700">
   <div class="min-h-full lg:hidden">
     <div class="p-5">
-      Не доступно на мобильных устройствах, используйте на ПК
+      Это приложение предназначено для пачати на клавиатуре, используйте ПК
     </div>
   </div>
   <div class="hidden sm:block">
@@ -43,7 +41,7 @@
       <Menu />
       <button
         onclick={() => (currentView = views[1])}
-        class="my-25 text-2xl px-4 py-1 rounded-lg cursor-pointer active:scale-80 transition-transform bg-blue-950 w-75 mx-40"
+        class="my-25 text-2xl px-4 py-1 rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 w-75 ml-40"
       >
         Начать тренировку
       </button>
