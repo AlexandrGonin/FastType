@@ -3,8 +3,9 @@
   import Menu from "./Menu.svelte";
   import Error404 from "./Error404.svelte";
   import logo from "./assets/logo.svg";
+  import Analytics from "./Analytics.svelte";
 
-  const views = ["Главная", "Играть"];
+  const views = ["Главная", "Играть", "Аналитика"];
   let currentView = $state(views[0]);
 </script>
 
@@ -47,6 +48,8 @@
       </button>
     {:else if currentView == "Играть"}
       <Game />
+    {:else if currentView == "Аналитика"}
+      <Analytics />
     {:else}
       <Error404 />
     {/if}

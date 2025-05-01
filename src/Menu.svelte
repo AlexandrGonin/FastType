@@ -80,7 +80,7 @@
 <div class="mt-50 ml-40">
   <div class="w-400">
     <div
-      use:animateTyping={["FastType", "Train your skills"]}
+      use:animateTyping={["FastType", "Тренируй навыки"]}
       class="text-7xl font-mono"
     ></div>
   </div>

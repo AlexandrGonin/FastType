@@ -3,13 +3,13 @@
     import { words } from "./Words/words.js";
 
     type NestedArray<T> = Array<Array<T>>;
-    function shuffleArray<T>(array: T[]): void {
+    export function shuffleArray<T>(array: T[]): void {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1)); // выбираем индекс от 0 до текущего элемента включительно
             [array[i], array[j]] = [array[j], array[i]]; // меняем местами два элемента
         }
     }
-    const flattenNestedList = <T,>(nestedList: NestedArray<T>): T[] => {
+    export const flattenNestedList = <T,>(nestedList: NestedArray<T>): T[] => {
         return nestedList.reduce(
             (acc: T[], currentValue: T[]) => acc.concat(currentValue),
             [] as T[],
@@ -22,15 +22,29 @@
     let currentWord = $state("");
     let input = $state("");
     let score = $state(Number(localStorage.getItem("score")) ?? 0);
-    $effect(() => localStorage.setItem("score", score.toString()));
-    let currentNum = $state(0);
-
-    function startGame() {
-        game = true;
-        currentWord = words1[currentNum];
-        score = 0;
-        input = "";
+    let correctClicks = $state(
+        Number(localStorage.getItem("correctClicksCommon")) ?? 0,
+    );
+    let incorrectClicks = $state(
+        Number(localStorage.getItem("incorrectClicksCommon")) ?? 0,
+    );
+    if (score) {
+        score -= 1;
     }
+    if (correctClicks) {
+        correctClicks -= 1;
+    }
+    $effect(() => localStorage.setItem("score", score.toString()));
+    $effect(() =>
+        localStorage.setItem("correctClicksCommon", correctClicks.toString()),
+    );
+    $effect(() =>
+        localStorage.setItem(
+            "incorrectClicksCommon",
+            incorrectClicks.toString(),
+        ),
+    );
+    let currentNum = $state(0);
 
     $effect(() => {
         if (currentWord == input) {
@@ -38,11 +52,13 @@
             currentWord = words1[currentNum];
             input = "";
             score += 1;
+            correctClicks += 1;
             currentNum += 1;
         }
         if (!currentWord.startsWith(input)) {
             input = "";
             isCorrectLetter = false;
+            incorrectClicks += 1;
         }
     });
 
@@ -59,7 +75,7 @@
     {#if currentNum}
         <div class="space-y-3 text-3xl">
             <div>
-                Прогресс: {Number(localStorage.getItem("score"))} символов
+                Прогресс: {score} символов
             </div>
             <div class="font-mono py-5 flex whitespace-pre-wrap">
                 <div style="color: {isCorrectLetter ? 'white' : 'red'}">
