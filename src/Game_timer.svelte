@@ -3,7 +3,7 @@
   import { words } from "./Words/words.js";
 
   let game = $state(false);
-  let currentWord = $state();
+  let currentWord = $state("");
   let currentLetter = $state();
   let input = $state("");
   let score = $state(0);
@@ -48,7 +48,7 @@
     function decreaseTimer() {
       if (timer > 0) {
         timer -= 1;
-        if (currentWord != input && game) {
+        if (!currentWord.startsWith(input) && game) {
           incorrectClicks += 1;
         }
 

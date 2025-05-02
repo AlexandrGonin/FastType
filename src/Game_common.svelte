@@ -77,8 +77,10 @@
             <div>
                 Прогресс: {score} символов
             </div>
-            <div class="font-mono py-5 flex whitespace-pre-wrap">
-                <div style="color: {isCorrectLetter ? 'white' : 'red'}">
+            <div class="font-mono py-5 flex whitespace-pre-wrap text-amber-200">
+                <div
+                    style="color: {isCorrectLetter ? 'text-amber-200' : 'red'}"
+                >
                     {words1.slice(currentNum - 1, currentNum).join("")}
                 </div>
                 <div>
