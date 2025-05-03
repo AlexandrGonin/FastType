@@ -1,11 +1,9 @@
 @import "tailwindcss";
-@theme{
+@theme {
     --font-mono: "JetBrains Mono", monospace;
 }
 
-body{
+body {
     @apply text-white bg-neutral-800 font-mono;
     overflow: hidden;
-    
 }
-

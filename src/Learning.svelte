@@ -1,8 +1,12 @@
 <script lang="ts">
   import type { Action } from "svelte/action";
-  import { wordsExp } from "./Words/Learning/lvl1.js";
-  let wordsShuf = $state(wordsExp);
-  let words: string[] = $state(wordsShuf);
+  import { words1 } from "./Words/Learning/lvl1.js";
+  import { words2 } from "./Words/Learning/lvl2.js";
+  import { words3 } from "./Words/Learning/lvl3.js";
+  import { words4 } from "./Words/Learning/lvl4.js";
+  import { words5 } from "./Words/Learning/lvl5.js";
+  import { words6 } from "./Words/Learning/lvl6.js";
+  import { words7 } from "./Words/Learning/lvl7.js";
 
   type NestedArray<T> = Array<Array<T>>;
   export function shuffleArray<T>(array: T[]): void {
@@ -11,48 +15,69 @@
       [array[i], array[j]] = [array[j], array[i]]; // меняем местами два элемента
     }
   }
-  export const flattenNestedList = <T,>(nestedList: NestedArray<T>): T[] => {
-    return nestedList.reduce(
-      (acc: T[], currentValue: T[]) => acc.concat(currentValue),
-      [] as T[],
-    );
-  };
-  for (let x = 0; x < 5; x += 1) {
-    shuffleArray(wordsShuf);
-    words.push(
-      wordsShuf[0],
-      wordsShuf[1],
-      wordsShuf[2],
-      wordsShuf[3],
-      wordsShuf[4],
-      wordsShuf[5],
-    );
-  }
-  // let words1 = flattenNestedList(words);
+  let words = words1;
+
   let isCorrectLetter = $state(true);
   let game = $state(true);
   let currentWord = $state("");
+
   let input = $state("");
+  let level = $state(Number(localStorage.getItem("levelLearning")) ?? 1);
+
+  if (level == 1) {
+    words = words1;
+  }
+  if (level == 2) {
+    words = words2;
+  }
+  if (level == 3) {
+    words = words3;
+  }
+  if (level == 4) {
+    words = words4;
+  }
+  if (level == 5) {
+    words = words5;
+  }
+  if (level == 6) {
+    words = words6;
+  }
+  if (level == 7) {
+    words = words7;
+  }
+  if (level == 8) {
+    words = [""];
+  }
+
   let score = $state(Number(localStorage.getItem("scoreLearning")) ?? 0);
   if (score) {
     score -= 1;
   }
+  $effect(() => localStorage.setItem("levelLearning", level.toString()));
   $effect(() => localStorage.setItem("scoreLearning", score.toString()));
-  let currentNum = $state(0);
+
+  $effect(() => {
+    if (Math.round((100 * score) / words.length) >= 100) {
+      level += 1;
+      score = 0;
+    }
+  });
 
   $effect(() => {
     if (currentWord == input) {
       isCorrectLetter = true;
-      currentWord = words[currentNum];
+      currentWord = words[score];
       input = "";
       score += 1;
-      currentNum += 1;
     }
     if (!currentWord.startsWith(input)) {
       input = "";
       isCorrectLetter = false;
     }
-    if (words.length - currentNum) {
+    if (words.length - score) {
+    }
+    if (input) {
+      input = "";
     }
   });
 
@@ -67,12 +92,14 @@
 
 <div class="p-50 space-y-5">
   <div class="space-y-3 text-3xl">
-    <div class="font-mono py-5 flex whitespace-pre-wrap">
-      <div style="color: {isCorrectLetter ? 'white' : 'red'}">
-        {words.slice(currentNum - 1, currentNum).join("")}
+    <div>Уровень {level}</div>
+    <div>Пройдено на {Math.round((100 * score) / words.length)}%</div>
+    <div class="font-mono py-5 flex whitespace-pre-wrap text-amber-200">
+      <div style="color: {isCorrectLetter ? 'amber-200' : 'red'}">
+        {words.slice(score - 1, score).join("")}
       </div>
       <div>
-        {words.slice(currentNum, currentNum - 1 + 68).join("")}
+        {words.slice(score, score - 1 + 68).join("")}
       </div>
     </div>
     <div class="flex">
