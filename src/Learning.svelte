@@ -24,6 +24,16 @@
   let input = $state("");
   let level = $state(Number(localStorage.getItem("levelLearning")) ?? 1);
 
+  let correctClicks = $state(
+    Number(localStorage.getItem("correctClicksLearning")) ?? 0,
+  );
+  let incorrectClicks = $state(
+    Number(localStorage.getItem("incorrectClicksLearning")) ?? 0,
+  );
+
+  if (!level) {
+    level = 1;
+  }
   if (level == 1) {
     words = words1;
   }
@@ -53,8 +63,18 @@
   if (score) {
     score -= 1;
   }
+  if (correctClicks) {
+    correctClicks -= 1;
+  }
   $effect(() => localStorage.setItem("levelLearning", level.toString()));
   $effect(() => localStorage.setItem("scoreLearning", score.toString()));
+
+  $effect(() =>
+    localStorage.setItem("correctClicksLearning", correctClicks.toString()),
+  );
+  $effect(() =>
+    localStorage.setItem("incorrectClicksLearning", incorrectClicks.toString()),
+  );
 
   $effect(() => {
     if (Math.round((100 * score) / words.length) >= 100) {
@@ -69,10 +89,12 @@
       currentWord = words[score];
       input = "";
       score += 1;
+      correctClicks += 1;
     }
     if (!currentWord.startsWith(input)) {
       input = "";
       isCorrectLetter = false;
+      incorrectClicks += 1;
     }
     if (words.length - score) {
     }

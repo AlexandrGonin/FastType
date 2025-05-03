@@ -14,10 +14,14 @@
   );
 
   let correctClicksLearning = $state(
-    Number(localStorage.getItem("correctClicksLearing")) ?? 0,
+    Number(localStorage.getItem("correctClicksLearning")) ?? 0,
   );
   let incorrectClicksLearning = $state(
     Number(localStorage.getItem("incorrectClicksLearning")) ?? 0,
+  );
+
+  let levelLearning = $state(
+    Number(localStorage.getItem("levelLearning")) ?? 0,
   );
 
   let accuracyCommon = Math.round(
@@ -43,7 +47,7 @@
     <b> Общая статистика </b><br />
     Точность: {#if !Number.isNaN(correctClicks / (correctClicks + incorrectClicks))}
       {Math.round(100 * (correctClicks / (correctClicks + incorrectClicks)))}
-    {:else}0{/if}%
+    {:else}100{/if}%
     <br />
     Верных нажатий: {correctClicks} <br />
     Неверных нажатий: {incorrectClicks}
@@ -57,7 +61,7 @@
             (correctClicksCommon /
               (correctClicksCommon + incorrectClicksCommon)),
         )}
-      {:else}0{/if}%
+      {:else}100{/if}%
       <br />
       Верных нажатий: {correctClicksCommon} <br />
       Неверных нажатий: {incorrectClicksCommon}
@@ -68,20 +72,21 @@
         {Math.round(
           100 * (correctClicksTime / (correctClicksTime + incorrectClicksTime)),
         )}
-      {:else}0{/if}%
+      {:else}100{/if}%
       <br />
       Верных слов: {correctClicksTime} <br />
       Неверных слов: {incorrectClicksTime}
     </div>
     <div class="bg-violet-300 w-full h-50 rounded-lg p-5">
       <b> Обучение </b><br />
+      Текущий уровень: {levelLearning} <br />
       Точность: {#if !Number.isNaN(accuracyLearning)}
         {Math.round(
           100 *
             (correctClicksLearning /
               (correctClicksLearning + incorrectClicksLearning)),
         )}
-      {:else}0{/if}%
+      {:else}100{/if}%
       <br />
       Верных слов: {correctClicksLearning} <br />
       Неверных слов: {incorrectClicksLearning}
