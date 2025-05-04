@@ -23,6 +23,47 @@
 
   let input = $state("");
   let level = $state(Number(localStorage.getItem("levelLearning")) ?? 1);
+  let isLevelChange = $state(false);
+
+  function changeCond() {
+    isLevelChange = !isLevelChange;
+  }
+
+  function changeLevel1(currentLevel: any) {
+    isLevelChange = !isLevelChange;
+    level = 1;
+    score = 0;
+  }
+  function changeLevel2(currentLevel: any) {
+    isLevelChange = !isLevelChange;
+    level = 2;
+    score = 0;
+  }
+  function changeLevel3(currentLevel: any) {
+    isLevelChange = !isLevelChange;
+    level = 3;
+    score = 0;
+  }
+  function changeLevel4(currentLevel: any) {
+    isLevelChange = !isLevelChange;
+    level = 4;
+    score = 0;
+  }
+  function changeLevel5(currentLevel: any) {
+    isLevelChange = !isLevelChange;
+    level = 5;
+    score = 0;
+  }
+  function changeLevel6(currentLevel: any) {
+    isLevelChange = !isLevelChange;
+    level = 6;
+    score = 0;
+  }
+  function changeLevel7(currentLevel: any) {
+    isLevelChange = !isLevelChange;
+    level = 7;
+    score = 0;
+  }
 
   let correctClicks = $state(
     Number(localStorage.getItem("correctClicksLearning")) ?? 0,
@@ -113,10 +154,17 @@
 <svelte:window onclick={() => init(document.getElementById("input")!)} />
 
 <div class="p-50 space-y-5">
-  <div class="space-y-3 text-3xl">
+  <div class="space-y-3 text-3xl flex flex-col gap-2">
+    <div>
+      <button
+        class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+        onclick={changeCond}>Сменить уровень</button
+      >
+    </div>
     <div>Уровень {level}</div>
+
     <div>Пройдено на {Math.round((100 * score) / words.length)}%</div>
-    <div class="font-mono py-5 flex whitespace-pre-wrap text-amber-200">
+    <div class="font-mono flex whitespace-pre-wrap text-amber-200">
       <div style="color: {isCorrectLetter ? 'amber-200' : 'red'}">
         {words.slice(score - 1, score).join("")}
       </div>
@@ -136,3 +184,38 @@
     </div>
   </div>
 </div>
+{#if isLevelChange}
+  <div
+    class="fixed top-0 left-0 w-screen h-screen bg-black/75 z-50 flex items-center justify-center text-white font-bold gap-5"
+  >
+    <button
+      class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+      onclick={changeLevel1}>Уровень 1</button
+    >
+    <button
+      class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+      onclick={changeLevel2}>Уровень 2</button
+    >
+
+    <button
+      class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+      onclick={changeLevel3}>Уровень 3</button
+    >
+    <button
+      class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+      onclick={changeLevel4}>Уровень 4</button
+    >
+    <button
+      class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+      onclick={changeLevel5}>Уровень 5</button
+    >
+    <button
+      class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+      onclick={changeLevel6}>Уровень 6</button
+    >
+    <button
+      class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+      onclick={changeLevel7}>Уровень 7</button
+    >
+  </div>
+{/if}
