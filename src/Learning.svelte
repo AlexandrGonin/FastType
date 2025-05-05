@@ -15,7 +15,7 @@
       [array[i], array[j]] = [array[j], array[i]]; // меняем местами два элемента
     }
   }
-  let words = words1;
+  let words = $state(words1);
 
   let isCorrectLetter = $state(true);
   let game = $state(true);
@@ -29,41 +29,87 @@
     isLevelChange = !isLevelChange;
   }
 
-  function changeLevel1(currentLevel: any) {
-    isLevelChange = !isLevelChange;
+  function updateWords() {
+    if (!level) {
+      level = 1;
+    }
+    if (level == 1) {
+      words = words1;
+    }
+    if (level == 2) {
+      words = words2;
+    }
+    if (level == 3) {
+      words = words3;
+    }
+    if (level == 4) {
+      words = words4;
+    }
+    if (level == 5) {
+      words = words5;
+    }
+    if (level == 6) {
+      words = words6;
+    }
+    if (level == 7) {
+      words = words7;
+    }
+    if (level == 8) {
+      words = [""];
+    }
+  }
+
+  function changeLevel1() {
+    words = words1;
+    changeCond();
     level = 1;
-    score = 0;
+    score = 1;
+    currentWord = words[score];
   }
-  function changeLevel2(currentLevel: any) {
-    isLevelChange = !isLevelChange;
+  function changeLevel2() {
+    words = words2;
+    changeCond();
     level = 2;
-    score = 0;
+    score = 1;
+    currentWord = words[score];
   }
-  function changeLevel3(currentLevel: any) {
-    isLevelChange = !isLevelChange;
+  function changeLevel3() {
+    changeCond();
+    words = words3;
     level = 3;
-    score = 0;
+    score = 1;
+    currentWord = words[score];
   }
-  function changeLevel4(currentLevel: any) {
-    isLevelChange = !isLevelChange;
+  function changeLevel4() {
+    changeCond();
+    words = words4;
     level = 4;
-    score = 0;
+    score = 1;
+    currentWord = words[score];
   }
-  function changeLevel5(currentLevel: any) {
-    isLevelChange = !isLevelChange;
+  function changeLevel5() {
+    changeCond();
+    words = words5;
     level = 5;
-    score = 0;
+    score = 1;
+    currentWord = words[score];
   }
-  function changeLevel6(currentLevel: any) {
-    isLevelChange = !isLevelChange;
+  function changeLevel6() {
+    changeCond();
+    words = words6;
     level = 6;
-    score = 0;
+    score = 1;
+    currentWord = words[score];
   }
-  function changeLevel7(currentLevel: any) {
-    isLevelChange = !isLevelChange;
+  function changeLevel7() {
+    changeCond();
+    words = words7;
     level = 7;
-    score = 0;
+    score = 1;
+    currentWord = words[score];
   }
+
+  updateWords();
 
   let correctClicks = $state(
     Number(localStorage.getItem("correctClicksLearning")) ?? 0,
@@ -71,34 +117,6 @@
   let incorrectClicks = $state(
     Number(localStorage.getItem("incorrectClicksLearning")) ?? 0,
   );
-
-  if (!level) {
-    level = 1;
-  }
-  if (level == 1) {
-    words = words1;
-  }
-  if (level == 2) {
-    words = words2;
-  }
-  if (level == 3) {
-    words = words3;
-  }
-  if (level == 4) {
-    words = words4;
-  }
-  if (level == 5) {
-    words = words5;
-  }
-  if (level == 6) {
-    words = words6;
-  }
-  if (level == 7) {
-    words = words7;
-  }
-  if (level == 8) {
-    words = [""];
-  }
 
   let score = $state(Number(localStorage.getItem("scoreLearning")) ?? 0);
   if (score) {
