@@ -88,8 +88,8 @@
         )}
       {:else}100{/if}%
       <br />
-      Верных слов: {correctClicksLearning} <br />
-      Неверных слов: {incorrectClicksLearning}
+      Верных символов: {correctClicksLearning} <br />
+      Неверных символов: {incorrectClicksLearning}
     </div>
   </div>
 </div>

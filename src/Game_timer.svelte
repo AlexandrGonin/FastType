@@ -76,20 +76,22 @@
 
 <svelte:window onclick={() => init(document.getElementById("input")!)} />
 <div>
-  <div class="flex justify-center text-2xl">Выберите время:</div>
-  <div class="flex justify-center text-2xl my-5 gap-x-10">
-    {#each times as time}
-      <button
-        class="rounded-lg bg-violet-500 p-2 my-5 cursor-pointer active:scale-80 transition-transform"
-        class:bg-violet-700={timer == time}
-        onclick={() => changeTime(time)}
-      >
-        {time} сек
-      </button>
-    {/each}
-  </div>
+  {#if !game}
+    <div class="flex justify-center text-2xl">Выберите время:</div>
+    <div class="flex justify-center text-2xl my-5 gap-x-10">
+      {#each times as time}
+        <button
+          class="rounded-lg bg-violet-500 p-2 my-5 cursor-pointer active:scale-80 transition-transform"
+          class:bg-violet-700={timer == time}
+          onclick={() => changeTime(time)}
+        >
+          {time} сек
+        </button>
+      {/each}
+    </div>
+  {/if}
 </div>
-<div class="px-40 py-20 space-y-5">
+<div class="px-40 py-20 space-y-5 flex align-middle flex-col">
   <div class="text-4xl">
     <div class="mb-10">Счет: {score}</div>
     {#if !game}
