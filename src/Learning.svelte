@@ -7,19 +7,14 @@
   import { words5 } from "./Words/Learning/lvl5.js";
   import { words6 } from "./Words/Learning/lvl6.js";
   import { words7 } from "./Words/Learning/lvl7.js";
+  import arms_pic from "./assets/arms_pic.jpg";
 
-  type NestedArray<T> = Array<Array<T>>;
-  export function shuffleArray<T>(array: T[]): void {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1)); // выбираем индекс от 0 до текущего элемента включительно
-      [array[i], array[j]] = [array[j], array[i]]; // меняем местами два элемента
-    }
-  }
   let words = $state(words1);
 
   let isCorrectLetter = $state(true);
   let game = $state(true);
   let currentWord = $state("");
+  let isViewOfPic = $state(false);
 
   let input = $state("");
   let level = $state(Number(localStorage.getItem("levelLearning")) ?? 1);
@@ -109,6 +104,10 @@
     currentWord = words[score];
   }
 
+  function changeCondPic() {
+    isViewOfPic = !isViewOfPic;
+  }
+
   updateWords();
 
   let correctClicks = $state(
@@ -176,6 +175,14 @@
     <div>
       <button
         class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+        onclick={changeCondPic}
+      >
+        Расположение рук
+      </button>
+    </div>
+    <div>
+      <button
+        class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
         onclick={changeCond}>Сменить уровень</button
       >
     </div>
@@ -235,5 +242,19 @@
       class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
       onclick={changeLevel7}>Уровень 7</button
     >
+  </div>
+{/if}
+{#if isViewOfPic}
+  <div
+    class="fixed top-0 left-0 w-screen h-screen bg-black/75 z-50 flex items-center justify-center text-white font-bold gap-5"
+  >
+    <div class="m-100 flex flex-col">
+      <img src={arms_pic} class="rounded-2xl m-10" />
+
+      <button
+        class="rounded-lg cursor-pointer active:scale-80 transition-transform bg-violet-500 p-2"
+        onclick={changeCondPic}>ОК</button
+      >
+    </div>
   </div>
 {/if}
