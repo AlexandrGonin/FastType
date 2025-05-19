@@ -12,7 +12,7 @@
 <main class="h-dvh flex flex-col bg-gradient-to-t from-purple-700 to-blue-700">
   <div class="min-h-full lg:hidden">
     <div class="p-5">
-      Это приложение предназначено для пачати на клавиатуре, используйте ПК
+      Это приложение предназначено для печати на клавиатуре, используйте ПК
     </div>
   </div>
   <div class="hidden sm:block">
